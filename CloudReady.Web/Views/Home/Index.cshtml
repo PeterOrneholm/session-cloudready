@@ -5,16 +5,16 @@
 
 <h1>Bilder</h1>
 
-<h2>Ny</h2>
-
 @using (var form = Html.BeginForm("UploadImages", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
-    <input type="file" name="files" multiple accept="image/*" class="form-control"/>
-    <br/>
-    <input type="submit" value="Ladda upp" class="btn btn-default" />
+    <div class="input-group" style="max-width: 500px;">
+        <input type="file" name="files" multiple accept="image/*" class="form-control" />
+        <span class="input-group-btn">
+            <input type="submit" value="Ladda upp" class="btn btn-primary" />
+        </span>
+    </div>
 }
 
-<h2>Befintliga</h2>
 @foreach (var image in Model)
 {
     <div class="media">
@@ -23,7 +23,7 @@
         </div>
         <div class="media-body">
             <h4 class="media-heading">@image.Name</h4>
-            Size: @(image.Size / 1000) kb
+            @(image.Size / 1000) kb
         </div>
     </div>
 }
