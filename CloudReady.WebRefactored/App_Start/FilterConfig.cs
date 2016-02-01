@@ -1,4 +1,6 @@
-﻿namespace CloudReady.WebRefactored
+﻿using System.Web.Mvc;
+
+namespace CloudReady.WebRefactored
 {
     public class FilterConfig
     {

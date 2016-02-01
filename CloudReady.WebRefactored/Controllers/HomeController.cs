@@ -1,13 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.IO;
+using System.Web;
+using System.Web.Mvc;
 using CloudReady.WebRefactored.Models;
 
 namespace CloudReady.WebRefactored.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly string _connectionString = "Data Source=.;Initial Catalog=CloudReady;Trusted_Connection=True";
+        private readonly string _connectionString = ConfigurationManager.ConnectionStrings["CloudReadyDb"].ConnectionString;
 
         public ActionResult Index()
         {
@@ -24,7 +28,7 @@ namespace CloudReady.WebRefactored.Controllers
                 if (file != null && file.ContentLength > 0)
                 {
                     var originalFilename = file.FileName;
-                    var extension = Path.GetExtension(originalFilename)?.TrimStart() ?? string.Empty;
+                    var extension = Path.GetExtension(originalFilename)?.TrimStart('.') ?? string.Empty;
                     var name = Path.GetFileNameWithoutExtension(originalFilename);
                     var size = file.ContentLength;
                     var id = SaveImage(extension, name, size);

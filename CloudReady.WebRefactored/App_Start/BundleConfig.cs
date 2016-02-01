@@ -1,4 +1,6 @@
-﻿namespace CloudReady.WebRefactored
+﻿using System.Web.Optimization;
+
+namespace CloudReady.WebRefactored
 {
     public class BundleConfig
     {

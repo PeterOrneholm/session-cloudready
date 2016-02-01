@@ -1,4 +1,6 @@
-﻿namespace CloudReady.WebRefactored
+﻿using System.Web.Http;
+
+namespace CloudReady.WebRefactored
 {
     public static class WebApiConfig
     {

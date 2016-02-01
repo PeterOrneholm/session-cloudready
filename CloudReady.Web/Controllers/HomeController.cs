@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
 using System.Web;
@@ -27,7 +28,7 @@ namespace CloudReady.Web.Controllers
                 if (file != null && file.ContentLength > 0)
                 {
                     var originalFilename = file.FileName;
-                    var extension = Path.GetExtension(originalFilename)?.TrimStart() ?? string.Empty;
+                    var extension = Path.GetExtension(originalFilename)?.TrimStart('.') ?? string.Empty;
                     var name = Path.GetFileNameWithoutExtension(originalFilename);
                     var size = file.ContentLength;
                     var id = SaveImage(extension, name, size);
