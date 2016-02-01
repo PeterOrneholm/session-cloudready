@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudReady.Web", "CloudReady.Web\CloudReady.Web.csproj", "{91DBD66F-76E5-41F2-B723-4E02025261D8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CloudReady.WebRefactored", "CloudReady.WebRefactored\CloudReady.WebRefactored.csproj", "{46B875F0-6A67-4D02-B22E-7562C8C124E2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{91DBD66F-76E5-41F2-B723-4E02025261D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91DBD66F-76E5-41F2-B723-4E02025261D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91DBD66F-76E5-41F2-B723-4E02025261D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46B875F0-6A67-4D02-B22E-7562C8C124E2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46B875F0-6A67-4D02-B22E-7562C8C124E2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46B875F0-6A67-4D02-B22E-7562C8C124E2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46B875F0-6A67-4D02-B22E-7562C8C124E2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
