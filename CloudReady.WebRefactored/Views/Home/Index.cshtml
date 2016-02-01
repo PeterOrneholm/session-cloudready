@@ -1,0 +1,29 @@
+﻿@model List<CloudReady.Web.Models.Image>
+@{
+    ViewBag.Title = "Bilder";
+}
+
+<h1>Bilder (Efter)</h1>
+
+@using (var form = Html.BeginForm("UploadImages", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    <div class="input-group" style="max-width: 500px;">
+        <input type="file" name="files" multiple accept="image/*" class="form-control" />
+        <span class="input-group-btn">
+            <input type="submit" value="Ladda upp" class="btn btn-primary" />
+        </span>
+    </div>
+}
+
+@foreach (var image in Model)
+{
+    <div class="media">
+        <div class="media-left">
+            <img class="media-object" src="@image.Url" alt="@image.Name" style="width: 60px; height: 60px;">
+        </div>
+        <div class="media-body">
+            <h4 class="media-heading">@image.Name</h4>
+            @(image.Size / 1000) kb
+        </div>
+    </div>
+}
