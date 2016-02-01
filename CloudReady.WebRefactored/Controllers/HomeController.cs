@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.IO;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
+using CloudReady.WebRefactored.Filesystem;
 using CloudReady.WebRefactored.Models;
 
 namespace CloudReady.WebRefactored.Controllers
@@ -13,15 +15,27 @@ namespace CloudReady.WebRefactored.Controllers
     {
         private readonly string _connectionString = ConfigurationManager.ConnectionStrings["CloudReadyDb"].ConnectionString;
 
-        public ActionResult Index()
+        private readonly IFilesystemReader _filesystemReader;
+        private readonly IFilesystemWriter _filesystemWriter;
+
+        public HomeController()
         {
-            var images = GetImages();
+            var localFilesystem = new LocalFilesystem();
+            var azureFilesystem = new AzureBlobFilesystem();
+
+            _filesystemReader = azureFilesystem;
+            _filesystemWriter = azureFilesystem;
+        }
+
+        public async Task<ActionResult> Index()
+        {
+            var images = await GetImages();
 
             return View(images);
         }
 
         [HttpPost]
-        public ActionResult UploadImages(IEnumerable<HttpPostedFileBase> files)
+        public async Task<ActionResult> UploadImages(IEnumerable<HttpPostedFileBase> files)
         {
             foreach (var file in files)
             {
@@ -33,10 +47,7 @@ namespace CloudReady.WebRefactored.Controllers
                     var size = file.ContentLength;
                     var id = SaveImage(extension, name, size);
 
-                    var newFilename = $"{id}.{extension}";
-                    var path = Path.Combine(Server.MapPath("~/fileuploads/"), newFilename);
-
-                    file.SaveAs(path);
+                    await _filesystemWriter.SaveAsync($"fileuploads/{id}.{extension}", file.InputStream);
                 }
             }
 
@@ -62,7 +73,7 @@ namespace CloudReady.WebRefactored.Controllers
             }
         }
 
-        private List<Image> GetImages()
+        private async Task<List<Image>> GetImages()
         {
             var images = new List<Image>();
 
@@ -84,7 +95,7 @@ namespace CloudReady.WebRefactored.Controllers
                             Extension = extension,
                             Name = (string)reader["Name"],
                             Size = (int)reader["Size"],
-                            Url = $"/fileuploads/{id}.{extension}"
+                            Url = await _filesystemReader.GetUrlAsync($"fileuploads/{id}.{extension}")
                         });
                     }
                 }

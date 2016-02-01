@@ -1,5 +1,4 @@
 ﻿using System.IO;
-using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace CloudReady.WebRefactored.Filesystem
@@ -11,8 +10,6 @@ namespace CloudReady.WebRefactored.Filesystem
 
     public interface IFilesystemReader
     {
-        Task<Stream> ReadAsync(string path);
-
         Task<string> GetUrlAsync(string path);
     }
 }
