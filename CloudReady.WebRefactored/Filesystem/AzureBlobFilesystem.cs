@@ -7,7 +7,7 @@ namespace CloudReady.WebRefactored.Filesystem
 {
     public class AzureBlobFilesystem : IFilesystemWriter, IFilesystemReader
     {
-        private const string ConnectionString = "[Secret]";
+        private const string ConnectionString = "";
 
         private readonly CloudBlobContainer _container;
 
